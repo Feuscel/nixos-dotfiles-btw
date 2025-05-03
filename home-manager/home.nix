@@ -18,6 +18,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    ./git.nix
   ];
 
   nixpkgs = {
@@ -56,19 +57,7 @@
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
-  programs.git = {
-
-  enable = true;
-  userName = "Feuscel";
-  userEmail = "feuscel@feuscel.dev";
-  extraConfig = {init.defaultBranch = "main";};
-  aliases = {
-    pu = "push";
-    co = "checkout";
-    cm = "commit";
-  };
-  };
-
+  
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
