@@ -67,34 +67,44 @@
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
-
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-24.11";
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "fr_FR.UTF-8";
   services.xserver = {
-  enable = true;
-  xkb.layout = "fr";
-  windowManager.i3 = {
    enable = true;
-   extraPackages = with pkgs; [
-   i3status
-   ];
+    xkb.layout = "fr";
+   displayManager.sddm = {
+     enable = true;
+    };
   };
-
-  };
-
+  
+  services.displayManager.sddm.wayland.enable = true;
   networking = {
-  hostName = "nixos-btw";
-networkmanager.enable = true;
+    hostName = "nixos-btw";
+    networkmanager.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-  neovim
-  git
-  wget
-  alacritty
-  inputs.home-manager.packages.${pkgs.system}.default
+    neovim
+    git
+    wget
+    kitty
+    alacritty
+    hyprland
+    wayland
+    inputs.home-manager.packages.${pkgs.system}.default
   ];
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
+    };
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   users.users = {
@@ -103,7 +113,7 @@ networkmanager.enable = true;
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
       ];
-      extraGroups = ["wheel" "networkmanager" ];
+      extraGroups = ["wheel" "networkmanager"];
     };
   };
 
