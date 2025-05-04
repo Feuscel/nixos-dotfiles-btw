@@ -75,14 +75,14 @@
   services.xserver = {
     enable = true;
     xkb.layout = "fr";
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      autoNumlock = true;
-    };
   };
 
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    autoNumlock = true;
+  };
+
   networking = {
     hostName = "nixos-btw";
     networkmanager.enable = true;

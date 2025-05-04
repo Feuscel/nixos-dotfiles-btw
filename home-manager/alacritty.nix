@@ -1,5 +1,5 @@
 {
-programs.alacritty = {
+  programs.alacritty = {
     enable = true;
     settings = {
       env = {
@@ -85,10 +85,12 @@ programs.alacritty = {
       };
       mouse.hide_when_typing = true;
       mouse = {
-        bindings = [{
-          mouse = "Middle";
-          action = "PasteSelection";
-        }];
+        bindings = [
+          {
+            mouse = "Middle";
+            action = "PasteSelection";
+          }
+        ];
       };
       keyboard = {
         bindings = [
