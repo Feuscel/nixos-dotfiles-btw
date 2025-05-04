@@ -73,13 +73,15 @@
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "fr_FR.UTF-8";
   services.xserver = {
-   enable = true;
+    enable = true;
     xkb.layout = "fr";
-   displayManager.sddm = {
-     enable = true;
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      autoNumlock = true;
     };
   };
-  
+
   services.displayManager.sddm.wayland.enable = true;
   networking = {
     hostName = "nixos-btw";
@@ -101,10 +103,9 @@
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-    };
+  };
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   users.users = {
