@@ -23,7 +23,8 @@
     ./hyprland.nix
     ./alacritty.nix
     ./waybar.nix
-  ];
+    ./nixvim.nix
+];
 
   nixpkgs = {
     # You can add overlays here

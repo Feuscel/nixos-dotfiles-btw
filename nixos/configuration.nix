@@ -100,8 +100,7 @@
     alacritty
     inputs.home-manager.packages.${pkgs.system}.default
   ];
-
-  programs.hyprland = {
+    programs.hyprland = {
     enable = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;

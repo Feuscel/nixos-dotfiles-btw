@@ -12,7 +12,7 @@
         "dbus-update-activation-environment --systemd &"
         "xdg-desktop-portal-hyprland &"
         "[workspace 1 silent] firefox"
-        "[workspace 2 silent] alacritty -e 'nvim ~'"
+        "[workspace 2 silent] alacritty -e 'nvim'"
         "[workspace 3 silent] alacritty"
         "[workspace 4 silent] spotify"
       ];
