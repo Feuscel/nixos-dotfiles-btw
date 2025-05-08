@@ -59,6 +59,8 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -77,10 +79,13 @@
     xkb.layout = "fr";
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    autoNumlock = true;
+  services.displayManager = {
+    defaultSession = "hyprland";
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      autoNumlock = true;
+    };
   };
 
   networking = {
@@ -92,10 +97,7 @@
     neovim
     git
     wget
-    kitty
     alacritty
-    hyprland
-    wayland
     inputs.home-manager.packages.${pkgs.system}.default
   ];
 

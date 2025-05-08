@@ -3,9 +3,80 @@
     enable = true;
     systemd.variables = ["--all"];
     systemd.enable = true;
+
     settings = {
+      monitor = [",preferred,auto,1"];
+      exec-once = [
+        "systemctl --user import-environment &"
+        "hash dbus-update-activation-environment 2>/dev/null &"
+        "dbus-update-activation-environment --systemd &"
+        "xdg-desktop-portal-hyprland &"
+        "[workspace 1 silent] firefox"
+        "[workspace 2 silent] alacritty -e 'nvim ~'"
+        "[workspace 3 silent] alacritty"
+        "[workspace 4 silent] spotify"
+      ];
       input = {
         kb_layout = "fr";
+      };
+      device = {
+        name = "epic-mouse-v1";
+        sensitivity = -0.5;
+      };
+      general = {
+        gaps_in = 3;
+        gaps_out = 5;
+        border_size = 3;
+        "col.active_border" = "rgba(ff5e81ac)";
+        #col.inactive_border = rgba(66333333)
+        "col.inactive_border" = "rgba(595959aa)";
+        layout = "dwindle"; # master|dwindle
+      };
+      dwindle = {
+        force_split = 0;
+        special_scale_factor = 0.8;
+        split_width_multiplier = 1.0;
+        use_active_for_splits = true;
+        pseudotile = "yes"; # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        preserve_split = "yes";
+      };
+      master = {
+        new_status = "master";
+        special_scale_factor = 0.8;
+      };
+
+      misc = {
+        #disable_autoreload = true
+        disable_hyprland_logo = true;
+        always_follow_on_dnd = true;
+        layers_hog_keyboard_focus = true;
+        animate_manual_resizes = false;
+        enable_swallow = true;
+        #swallow_regex =;
+        focus_on_activate = true;
+        vfr = 1;
+      };
+      decoration = {
+        active_opacity = 0.98;
+        inactive_opacity = 1.0;
+        fullscreen_opacity = 1.0;
+        rounding = 4;
+        blur = {
+          enabled = true;
+          size = 15;
+          passes = 2; # more passes = more resource intensive.
+          new_optimizations = true;
+          xray = true;
+          ignore_opacity = false;
+        };
+        shadow = {
+          enabled = false;
+          range = 4;
+          render_power = 3;
+          ignore_window = true;
+          color = "rgba(1a1a1aee)";
+        };
+        dim_inactive = false;
       };
       "$mod" = "SUPER";
       bind = [
@@ -95,8 +166,8 @@
         # Scroll through existing workspaces with mainMod + scroll"
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
-        "$mod,slash,workspace,previous"
-        "$mod,R,submap,resize"
+        #"$mod,slash,workspace,previous"
+        #"$mod,R,submap,resize"
         "CTRL SHIFT, left, resizeactive,-15 0"
         "CTRL SHIFT, right, resizeactive,15 0"
         "CTRL SHIFT, up, resizeactive,0 -15"
@@ -106,10 +177,20 @@
         "CTRL SHIFT, k, resizeactive, 0 -15"
         "CTRL SHIFT, j, resizeactive, 0 15"
       ];
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
+      #bindm = [
+      #"$mod, mouse:272, movewindow"
+      #"$mod, mouse:273, resizewindow"
+      #];
+      #binde = [
+      #",right,resizeactive,15 0"
+      #",left,resizeactive,-15 0"
+      #",up,resizeactive,0 -15"
+      #",down,resizeactive,0 15"
+      #",l,resizeactive,15 0"
+      #",h,resizeactive,-15 0"
+      #",k,resizeactive,0 -15"
+      #",j,resizeactive,0 15"
+      #];
       gestures = {
         workspace_swipe = true;
         workspace_swipe_fingers = 4;

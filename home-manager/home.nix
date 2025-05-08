@@ -22,6 +22,7 @@
     ./bash.nix
     ./hyprland.nix
     ./alacritty.nix
+    ./waybar.nix
   ];
 
   nixpkgs = {
@@ -54,9 +55,17 @@
     homeDirectory = "/home/feuscel";
   };
 
+  fonts.fontconfig.enable = true;
+
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [firefox ghostty];
+  home.packages = with pkgs; [
+    firefox
+    ghostty
+    waybar
+    spotify
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
